@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class TestScreen extends StatelessWidget {
-  const TestScreen({super.key});
+  TestScreen({super.key});
+  late Box box;
 
   @override
   Widget build(BuildContext context) {
@@ -11,20 +12,41 @@ class TestScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-
             ElevatedButton(
                 onPressed: () async {
-                  await Hive.openBox<String>("test");
+                  box = await Hive.openBox("test");
                 },
-                
-                child: Text("Open box")),
-
-                SizedBox(height: 30,),
+                child: Text("open box")),
+            SizedBox(
+              height: 30,
+            ),
             ElevatedButton(
                 onPressed: () {
-                Box testBox =  Hive.box<String>("test");
+                  box.putAll({
+                    "name": "ibrahim",
+                    9: true,
+                    "age": 30,
+                    0: false,
+                    2: [9, 2, 6]
+                  });
                 },
-                child: Text("Access box"))
+                child: Text("put data")),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  box.putAt(2, "mohamed");
+                },
+                child: Text("use put at method")),
+            SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  print(box.values);
+                },
+                child: Text("Display data"))
           ],
         ),
       ),
