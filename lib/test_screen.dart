@@ -22,31 +22,36 @@ class TestScreen extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  box.putAll({
-                    "name": "ibrahim",
-                    9: true,
-                    "age": 30,
-                    0: false,
-                    2: [9, 2, 6]
-                  });
+                  box.put(10, [0, 1, 2, 3]);
                 },
-                child: Text("put data")),
+                child: Text("Add data")),
             SizedBox(
               height: 30,
             ),
             ElevatedButton(
                 onPressed: () {
-                  box.putAt(2, "mohamed");
+                  List list = box.get(10);
+                  list[0] = 100;
+                  print(box.get(10));
+                  print(list);
                 },
-                child: Text("use put at method")),
+                child: Text("Change data")),
             SizedBox(
               height: 30,
             ),
             ElevatedButton(
                 onPressed: () {
-                  print(box.values);
+                  print(box.get(10));
                 },
-                child: Text("Display data"))
+                child: Text("Display data")),
+            SizedBox(
+              height: 60,
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  await box.clear();
+                },
+                child: Text("Clear data"))
           ],
         ),
       ),
